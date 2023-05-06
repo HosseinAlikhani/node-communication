@@ -1,14 +1,21 @@
+import ApplicationInterface from "./ApplicationInterface";
+import ExpressInterface from "./ExpressInterface";
+import ApiRoutes from "./Routes/ApiRoutes";
+const express = require('express');
+
 export default class Communication {
     
     /**
      * store express instance
+     * @var ExpressInterface
      */
-    private express;
+    private express: ExpressInterface;
 
     /**
      * store application instance
+     * @var ApplicationInterface
      */
-    private application;
+    private application: ApplicationInterface;
 
     /**
      * store Communication instance
@@ -20,8 +27,15 @@ export default class Communication {
      */
     public constructor()
     {
-        this.express = require('express');
-        this.application = this.express();
+        this.express = express
+        this.application = express();
+
+        this.initializeRoute();
+    }
+
+    private initializeRoute()
+    {
+        new ApiRoutes(this.express, this.application);
     }
 
     /**
