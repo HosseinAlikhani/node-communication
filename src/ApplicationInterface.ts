@@ -6,4 +6,12 @@ export default interface ApplicationInterface
      * @param closure 
      */
     listen(number, closure);
+
+    /**
+     * get http verb
+     * @param url 
+     * @param callback 
+     * @param action 
+     */
+    get(url: string, callback?: Function, action?: Function);
 }
