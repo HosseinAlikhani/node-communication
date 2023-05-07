@@ -30,7 +30,8 @@ export default class Communication {
         this.express = express
         this.application = express();
 
-        this.publishRoutes();
+        this.registerEnv(); // register .env
+        this.publishRoutes(); // register routes
     }
 
     /**
@@ -40,6 +41,16 @@ export default class Communication {
     private publishRoutes(): void
     {
         ApiRoutes.initialize(this.express, this.application);
+    }
+
+    /**
+     * register env variable
+     * @return void
+     */
+    private registerEnv(): void
+    {
+        const dotenv = require('dotenv');
+        dotenv.config({path: __dirname+'/../.env'});
     }
 
     /**
@@ -61,8 +72,10 @@ export default class Communication {
      */
     public startApplication()
     {
-        this.application.listen(3000, function(){
-            console.log('start application on port 3000 ...!');
+        const port = process.env.APP_PORT;
+
+        this.application.listen( port ?? 3000, function(){
+            console.log(`start application on port ${port} ...!`);
         })
     }
 }
