@@ -15,9 +15,26 @@ export default class Routes
      */
     protected application: ApplicationInterface;
 
-    public constructor(express: ExpressInterface, application: ApplicationInterface)
+    protected constructor(express: ExpressInterface, application: ApplicationInterface)
     {
         this.express = express;
         this.application = application;
+    }
+
+    /**
+     * initialize routes
+     * @param ExpressInterface express
+     * @param ApplicationInterface application
+     * @return void
+     */
+    public static initialize(express: ExpressInterface, application: ApplicationInterface): void
+    {
+        let instance = new this(express, application);
+        instance.register();
+    }
+
+    public register()
+    {
+        // register methods - routes - api
     }
 }
