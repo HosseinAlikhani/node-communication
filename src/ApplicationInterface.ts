@@ -14,4 +14,11 @@ export default interface ApplicationInterface
      * @param action 
      */
     get(url: string, callback?: Function, action?: Function);
+
+    /**
+     * application use action
+     * @param actionName 
+     * @param action 
+     */
+    use(actionName: string|Function, action?: Function);
 }
