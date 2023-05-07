@@ -1,11 +1,19 @@
-import ApplicationInterface from "../ApplicationInterface";
-import ExpressInterface from "../ExpressInterface";
 import Routes from "./Routes";
 
 export default class ApiRoutes extends Routes
 {
-    public constructor(express: ExpressInterface, application: ApplicationInterface)
+    public register()
     {
-        super(express, application);
+        this.auth();
+    }
+
+    private auth()
+    {
+        let groupAuth = this.express.Router();
+        groupAuth.get('/check', function(req, res){
+            return res.send('check auth');
+        });
+
+        this.application.use('/auth', groupAuth);
     }
 }
