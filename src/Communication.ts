@@ -30,14 +30,14 @@ export default class Communication {
         this.express = express
         this.application = express();
 
-        this.initializeRoute();
+        this.publishRoutes();
     }
 
     /**
      * initialize application routes
      * @return void
      */
-    private initializeRoute(): void
+    private publishRoutes(): void
     {
         ApiRoutes.initialize(this.express, this.application);
     }
