@@ -23,10 +23,24 @@ export default class Request implements MiddlewareInterface
     {
         return req.getContent = (key?: string) => {
             if(key){
-                console.log('key is ', key);
                 return req.body[key] ?? null;
             }
             return req.body;
-        }
+        };
+    }
+
+    /**
+     * set headers closure
+     * @param req 
+     * @returns 
+     */
+    private setHeaders(req)
+    {
+        return req.getHeaders = (key?: string) => {
+            if(key){
+                return req.headers[key] ?? null;
+            }
+            return req.headers;
+        };
     }
 }
