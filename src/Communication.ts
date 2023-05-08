@@ -1,6 +1,8 @@
 import ApplicationInterface from "./ApplicationInterface";
 import ExpressInterface from "./ExpressInterface";
+import Request from "./Infrastructure/Request/Request";
 import ApiRoutes from "./Routes/ApiRoutes";
+import bodyParser from "body-parser";
 const express = require('express');
 
 export default class Communication {
@@ -31,6 +33,7 @@ export default class Communication {
         this.application = express();
 
         this.registerEnv(); // register .env
+        this.registerInfrastructure(); // register infrastructure service
         this.publishRoutes(); // register routes
     }
 
@@ -51,6 +54,20 @@ export default class Communication {
     {
         const dotenv = require('dotenv');
         dotenv.config({path: __dirname+'/../.env'});
+    }
+
+    /**
+     * register infrastructure
+     * @return void
+     */
+    private registerInfrastructure()
+    {
+        // parse application/x-www-form-urlencoded
+        this.application.use(bodyParser.urlencoded({ extended: false }))
+
+        // parse application/json
+        this.application.use(bodyParser.json())
+        this.application.use( (req, res, next) => (new Request()).handle(req, res, next) );
     }
 
     /**
