@@ -1,7 +1,7 @@
 import MiddlewareInterface from "../Infrastructure/Contracts/MiddlewareInterface";
 import RequestInterface from "../Infrastructure/Request/RequestInterface";
 import ResponseInterface from "../Infrastructure/Response/ResponseInterface";
-import JWTService from "../Services/JWT/JWTService";
+import JWTService from "../Infrastructure/Services/JWT/JWTService";
 
 export default class AuthenticateMiddleware implements MiddlewareInterface
 {
