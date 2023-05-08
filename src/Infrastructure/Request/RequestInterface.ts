@@ -10,7 +10,13 @@ export default interface RequestInterface
     /**
      * get headers
      * @param string|null key
-     * @return object|null
+     * @return object|string|null
      */
-    getHeaders(key?: string): object|null;
+    getHeaders(key?: string): object|string|null;
+
+    /**
+     * set auth user
+     * @param object|null user 
+     */
+    setAuthUser(user?: object): void
 }
