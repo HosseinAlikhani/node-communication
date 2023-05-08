@@ -1,6 +1,7 @@
 import ApplicationInterface from "./ApplicationInterface";
 import ExpressInterface from "./ExpressInterface";
 import Request from "./Infrastructure/Request/Request";
+import Response from "./Infrastructure/Response/Response";
 import ApiRoutes from "./Routes/ApiRoutes";
 import bodyParser from "body-parser";
 const express = require('express');
@@ -68,6 +69,7 @@ export default class Communication {
         // parse application/json
         this.application.use(bodyParser.json())
         this.application.use( (req, res, next) => (new Request()).handle(req, res, next) );
+        this.application.use( (req, res, next) => (new Response()).handle(req, res, next) );
     }
 
     /**
