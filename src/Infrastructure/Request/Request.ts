@@ -10,7 +10,8 @@ export default class Request implements MiddlewareInterface
      */
     public handle(req, res, next)
     {
-        req = this.setcontent(req);
+        this.setcontent(req);
+        this.setHeaders(req);
         return next();
     }
 
