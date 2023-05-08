@@ -27,7 +27,8 @@ export default class Response implements MiddlewareInterface
     {
         return res.jsonResponseInit = (response: jsonResponse) => {
             return res.json({
-                status: response.status ?? 200,
+                status: response.status ? true : false,
+                status_code: response.status ?? 400,
                 message: response.message ?? null,
                 data: response.data ?? null
             });
