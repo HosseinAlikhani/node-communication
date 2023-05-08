@@ -19,4 +19,10 @@ export default interface RequestInterface
      * @param object|null user 
      */
     setAuthUser(user?: object): void
+
+    /**
+     * get authenticate user instance
+     * @return object|null
+     */
+    auth(): object|null
 }
