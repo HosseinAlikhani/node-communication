@@ -44,7 +44,7 @@ export default class JWTService
      * decode token with RS256 alg
      * @param token 
      */
-    public decodePassPhrase(token: string)
+    public decodePassPhrase(token)
     {
         var cert = fs.readFileSync(`${this.path}${this.publicCertName}`);  // get public key
         return jwt.verify(token, cert);
@@ -55,9 +55,9 @@ export default class JWTService
      * @param data 
      * @returns 
      */
-    public encodePassPhrase(data: object): string
+    public encodePassPhrase(data): string
     {
         var privateCert = fs.readFileSync(`${this.path}${this.privateCertName}`);
-        return jwt.sign( data, privateCert, { algorithm: 'RS256' });
+        return jwt.sign( data, privateCert, { algorithm: this.alg });
     }
 }
