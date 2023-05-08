@@ -1,4 +1,5 @@
-import MiddlewareInterface from "./MiddlewareInterface";
+import MiddlewareInterface from "../Infrastructure/Contracts/MiddlewareInterface";
+import RequestInterface from "../Infrastructure/Request/RequestInterface";
 
 export default class AuthenticateMiddleware implements MiddlewareInterface
 {
@@ -8,8 +9,9 @@ export default class AuthenticateMiddleware implements MiddlewareInterface
      * @param res 
      * @param next 
      */
-    public handle(req, res, next)
+    public handle(req: RequestInterface, res, next)
     {
-        console.log('middleware handle');
+        let authorizationToken = req.getHeaders('authorization');
+        return next();
     }
 }
