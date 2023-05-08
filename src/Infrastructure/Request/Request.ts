@@ -12,6 +12,7 @@ export default class Request implements MiddlewareInterface
     {
         this.setcontent(req);
         this.setHeaders(req);
+        this.setAuthUser(req, null);
         return next();
     }
 
@@ -33,9 +34,9 @@ export default class Request implements MiddlewareInterface
     /**
      * set headers closure
      * @param req 
-     * @returns 
+     * @returns object|string|null
      */
-    private setHeaders(req)
+    private setHeaders(req): object|string|null
     {
         return req.getHeaders = (key?: string) => {
             if(key){
@@ -43,5 +44,23 @@ export default class Request implements MiddlewareInterface
             }
             return req.headers;
         };
+    }
+
+    /**
+     * set auth user instance
+     * @param req
+     * @param object|null user 
+     */
+    private setAuthUser(req, user: object|null)
+    {
+        req.setAuthUser = (user: object|null) => {
+            req.authUser = user;
+        };
+
+        req.auth = () => {
+            return req.authUser;
+        }
+        
+        return req;
     }
 }
