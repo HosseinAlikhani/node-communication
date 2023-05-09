@@ -22,7 +22,7 @@ export default class Repository
         this.db = process.env.MONGODB_DB_NAME;
         
         if(! this.host || ! this.port || ! this.username || ! this.password || ! this.db){
-            throw new Error( global.trans() );
+            throw new Error( global.trans('NeedConfig') );
         }
     }
 
