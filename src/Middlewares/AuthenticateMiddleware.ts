@@ -17,7 +17,7 @@ export default class AuthenticateMiddleware implements MiddlewareInterface
         if(! authorizationToken){
             return res.responseJson({
                 status: 401,
-                message: 'need authorization'
+                message: global.trans('UNAUTHORIZED')
             });
         }
 
@@ -26,7 +26,7 @@ export default class AuthenticateMiddleware implements MiddlewareInterface
             if(! data.uuid ){
                 return res.responseJson({
                     status: 401,
-                    message: 'authorization code not valid ...!'
+                    message: global.trans('UNAUTHORIZED')
                 });
             }
 
@@ -35,7 +35,7 @@ export default class AuthenticateMiddleware implements MiddlewareInterface
         }catch(e){
             return res.responseJson({
                 status: 401,
-                message: 'authorization code not valid ..!'
+                message: global.trans('UNAUTHORIZED')
             });
         }
     }
