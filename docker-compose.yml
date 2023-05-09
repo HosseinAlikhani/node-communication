@@ -34,7 +34,7 @@ services:
 
   mongo:
     image: mongo
-    container_name: node-mongo
+    container_name: ${MONGODB_HOST}
     restart: always
     # ports:
       # - "80:27017"
