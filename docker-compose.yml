@@ -1,0 +1,56 @@
+version: '3.1'
+services:
+  # node services
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: node
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:3000"
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/nodejs
+    volumes:
+      - .:/var/www/nodejs
+    networks:
+      - nodejs
+
+  #Nginx Service
+  webserver:
+    image: nginx
+    container_name: node-nginx
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./:/var/www/nodejs
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - nodejs
+
+  mongo:
+    image: mongo
+    container_name: node-mongo
+    restart: always
+    # ports:
+      # - "80:27017"
+    volumes: 
+      - ./docker/mongodb/volume:/data/db
+      - ./docker/mongodb/init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+    command: mongod --auth
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGODB_DB_NAME}
+    networks:
+      - nodejs
+
+#Docker Networks
+networks:
+  nodejs:
+    driver: bridge
