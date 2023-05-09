@@ -2,7 +2,7 @@
     "name": "d3cr33/node-communication",
     "version": "1.0.0",
     "description": "",
-    "main": "src/index.ts",
+    "main": "index.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -13,6 +13,7 @@
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",
         "express": "^4.18.2",
+        "i18n": "^0.15.1",
         "jsonwebtoken": "^9.0.0",
         "mongodb": "^5.3.0"
     },
