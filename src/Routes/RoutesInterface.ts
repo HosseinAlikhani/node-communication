@@ -1,5 +1,5 @@
-import ApplicationInterface from "../ApplicationInterface";
-import ExpressInterface from "../ExpressInterface";
+import ApplicationInterface from "../Contracts/ApplicationInterface";
+import ExpressInterface from "../Contracts/ExpressInterface";
 
 export default interface RoutesInterface
 {

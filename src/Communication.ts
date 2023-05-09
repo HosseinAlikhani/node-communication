@@ -1,5 +1,5 @@
-import ApplicationInterface from "./ApplicationInterface";
-import ExpressInterface from "./ExpressInterface";
+import ApplicationInterface from "./Contracts/ApplicationInterface";
+import ExpressInterface from "./Contracts/ExpressInterface";
 import Request from "../Infrastructure/Request/Request";
 import Response from "../Infrastructure/Response/Response";
 import ApiRoutes from "./Routes/ApiRoutes";
