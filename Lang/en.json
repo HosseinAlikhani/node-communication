@@ -1,3 +1,4 @@
 {
-    "UNAUTHORIZED": "un authorized ...!"
+	"UNAUTHORIZED": "un authorized ...!",
+	"NeedConfig": "Need config ..!"
 }
