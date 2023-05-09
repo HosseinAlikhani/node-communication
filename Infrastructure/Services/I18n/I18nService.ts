@@ -26,7 +26,7 @@ export default class I18nService
         }
 
         // set global trans  closure
-        global.trans = (key) => this.instance.trans(key);
+        global.trans = (key, variable = null) => this.instance.trans(key, variable);
 
         return this.instance;
     }
@@ -34,10 +34,11 @@ export default class I18nService
     /**
      * trans keyword
      * @param string key
+     * @param object|null var
      * @return string
      */
-    public trans(key: string): string
+    public trans(key: string, variable?: object): string
     {
-        return this.i18n.__(key);
+        return this.i18n.__n(key, variable);
     }
 }
