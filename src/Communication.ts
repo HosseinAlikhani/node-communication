@@ -1,9 +1,10 @@
 import ApplicationInterface from "./ApplicationInterface";
 import ExpressInterface from "./ExpressInterface";
-import Request from "./Infrastructure/Request/Request";
-import Response from "./Infrastructure/Response/Response";
+import Request from "../Infrastructure/Request/Request";
+import Response from "../Infrastructure/Response/Response";
 import ApiRoutes from "./Routes/ApiRoutes";
 import bodyParser from "body-parser";
+import I18nService from "../Infrastructure/Services/I18n/I18nService";
 const express = require('express');
 
 export default class Communication {
@@ -65,11 +66,15 @@ export default class Communication {
     {
         // parse application/x-www-form-urlencoded
         this.application.use(bodyParser.urlencoded({ extended: false }))
-
         // parse application/json
         this.application.use(bodyParser.json())
+
+        // register Request & Response middleware
         this.application.use( (req, res, next) => (new Request()).handle(req, res, next) );
         this.application.use( (req, res, next) => (new Response()).handle(req, res, next) );
+
+        // register localization
+        I18nService.initialize();
     }
 
     /**
