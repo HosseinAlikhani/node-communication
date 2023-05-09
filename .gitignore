@@ -1,7 +1,5 @@
-/docker
+/docker/mongodb/volume
 /node_modules
 
 package-lock.json
-docker-compose.yml
-Dockerfile
 .env
