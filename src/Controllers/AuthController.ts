@@ -1,5 +1,5 @@
-import RequestInterface from "../Infrastructure/Request/RequestInterface";
-import ResponseInterface from "../Infrastructure/Response/ResponseInterface";
+import RequestInterface from "../../Infrastructure/Request/RequestInterface";
+import ResponseInterface from "../../Infrastructure/Response/ResponseInterface";
 
 export default class AuthController
 {
