@@ -1,42 +1,57 @@
 var MongoClient = require('mongodb').MongoClient;
 export default class Repository
 {
-    private host?: string;
-    private port?: string;
-    private username?: string;
-    private password?: string;
+    /**
+     * store mongo url connection
+     * @var string|null
+     */
+    private url?: string;
+
+    /**
+     * store mongo database name
+     * @var string|null
+     */
     private db?: string;
+    
+    /**
+     * store mongo database connection instance
+     */
     private connection;
 
+    /**
+     * repository constructor
+     */
     public constructor()
     {
-        this.initializeConfig();
-    }
-
-    private initializeConfig()
-    {
-        this.host = process.env.MONGODB_HOST;
-        this.port = process.env.MONGODB_PORT;
-        this.username = process.env.MONGODB_USERNAME;
-        this.password = process.env.MONGODB_PASSWORD;
         this.db = process.env.MONGODB_DB_NAME;
-        
-        if(! this.host || ! this.port || ! this.username || ! this.password || ! this.db){
-            throw new Error( global.trans('NeedConfig') );
-        }
+        this.url = process.env.MONGODB_URL;
     }
 
+    /**
+     * connect to mongo database
+     */
     protected async connect()
     {            
-        var url = `mongodb://${this.username}:${this.password}@${this.host}:${this.port}/${this.db}`;
-        this.connection = await MongoClient.connect(url, function(err, db) {
+        this.connection = await MongoClient.connect(this.url, function(err, db) {
             if (err) throw err;
             db.close();
         });
 
-        return this.connection.db(this.db);
+        this.connection.db(this.db); //connect to database 
+        return this.connection;
     }
 
+    /**
+     * get connection
+     */
+    protected getConnection()
+    {
+        return this.connection;
+    }
+
+    /**
+     * close connection
+     */
     protected async close()
     {
         return await this.connection.close();
