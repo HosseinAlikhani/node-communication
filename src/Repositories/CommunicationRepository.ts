@@ -4,13 +4,26 @@ export default class CommunicationRepository extends Repository
 {
     protected collection = 'communications';
 
+    private static instance;
+
+    /**
+     * initialize communication repository
+     */
+    public static initialize()
+    {
+        if(! this.instance){
+            this.instance = new this();
+        }
+        return this.instance;
+    }
+
     /**
      * connect to communication collection
      */
     private async communication()
     {
-        await this.connect();
-        return await this.getConnection().collection(this.collection);
+        let dbConnection = await this.connect();
+        return dbConnection.collection(this.collection);
     }
 
     /**
@@ -18,7 +31,9 @@ export default class CommunicationRepository extends Repository
      */
     public async find()
     {
-        return (await this.communication()).find().toArray();
+        let result = await (await this.communication()).find().toArray();
+        this.close();
+        return result;
     }
 
     /**
@@ -26,11 +41,13 @@ export default class CommunicationRepository extends Repository
      */
     public async insert()
     {
-        return (await this.communication()).insertOne({
+        (await this.communication()).insertOne({
             first_name: 'hossein',
             last_name: 'alikhani',
             mobile: '09361374744',
             email: 'hossein.alikhani@gmail.com'
         });
+
+        this.close();
     }
 }
