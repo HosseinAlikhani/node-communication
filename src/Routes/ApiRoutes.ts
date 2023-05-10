@@ -18,4 +18,11 @@ export default class ApiRoutes extends Routes
 
         this.application.use('/api/auth', groupAuth);
     }
+
+    private communication()
+    {
+        let groupCommunication = this.express.Router();
+
+        // groupCommunication.post()
+    }
 }
