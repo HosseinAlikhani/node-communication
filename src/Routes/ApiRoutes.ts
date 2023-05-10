@@ -1,4 +1,5 @@
 import AuthController from "../Controllers/AuthController";
+import CommunicationController from "../Controllers/CommunicationController";
 import AuthenticateMiddleware from "../Middlewares/AuthenticateMiddleware";
 import Routes from "./Routes";
 
@@ -7,6 +8,7 @@ export default class ApiRoutes extends Routes
     public register()
     {
         this.auth();
+        this.communication();
     }
 
     private auth()
@@ -23,6 +25,8 @@ export default class ApiRoutes extends Routes
     {
         let groupCommunication = this.express.Router();
 
-        // groupCommunication.post()
+        groupCommunication.post('', CommunicationController.postCommunication);
+
+        this.application.use('/api/communications', groupCommunication);
     }
 }
