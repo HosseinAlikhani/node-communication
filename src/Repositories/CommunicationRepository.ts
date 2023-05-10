@@ -32,7 +32,6 @@ export default class CommunicationRepository extends Repository
     public async find()
     {
         let result = await (await this.communication()).find().toArray();
-        this.close();
         return result;
     }
 
@@ -47,7 +46,5 @@ export default class CommunicationRepository extends Repository
             mobile: '09361374744',
             email: 'hossein.alikhani@gmail.com'
         });
-
-        this.close();
     }
 }
