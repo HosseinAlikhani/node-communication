@@ -32,13 +32,9 @@ export default class Repository
      */
     protected async connect()
     {            
-        this.connection = await MongoClient.connect(this.url, function(err, db) {
-            if (err) throw err;
-            db.close();
-        });
+        this.connection = await MongoClient.connect(this.url);
 
-        this.connection.db(this.db); //connect to database 
-        return this.connection;
+        return await this.connection.db(this.db); //connect to database
     }
 
     /**
