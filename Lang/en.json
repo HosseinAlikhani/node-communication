@@ -1,4 +1,5 @@
 {
 	"UNAUTHORIZED": "un authorized ...!",
-	"NeedConfig": "Need config ..!"
+	"NeedConfig": "Need config ..!",
+	"RequesterNotValid": "Requester Not Valid ...!"
 }
