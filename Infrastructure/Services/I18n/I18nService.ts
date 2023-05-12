@@ -12,7 +12,7 @@ export default class I18nService
         this.i18n = new I18n({
             locales: ['en'],
             defaultLocale: 'en',
-            directory: `${process.env.PWD}/Lang`
+            directory: `${process.env.PWD}/Infrastructure/Lang`
         });
     }
 
