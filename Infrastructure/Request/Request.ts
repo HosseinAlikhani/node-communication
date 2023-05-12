@@ -1,4 +1,4 @@
-import MiddlewareInterface from "../Contracts/MiddlewareInterface";
+import MiddlewareInterface from "../Middleware/MiddlewareInterface";
 
 export default class Request implements MiddlewareInterface
 {
