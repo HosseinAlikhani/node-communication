@@ -5,6 +5,7 @@ import Response from "../Infrastructure/Response/Response";
 import ApiRoutes from "./Routes/ApiRoutes";
 import bodyParser from "body-parser";
 import I18nService from "../Infrastructure/Services/I18n/I18nService";
+import ApiMiddleware from "../Infrastructure/Middleware/ApiMiddleware";
 const express = require('express');
 
 export default class Communication {
@@ -72,6 +73,9 @@ export default class Communication {
         // register Request & Response middleware
         this.application.use( (req, res, next) => (new Request()).handle(req, res, next) );
         this.application.use( (req, res, next) => (new Response()).handle(req, res, next) );
+
+        // default middlewares
+        this.application.use( (req, res, next) => (new ApiMiddleware()).handle(req, res, next) );
 
         // register localization
         I18nService.initialize();
