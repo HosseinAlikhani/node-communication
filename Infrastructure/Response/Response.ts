@@ -1,4 +1,4 @@
-import MiddlewareInterface from "../Contracts/MiddlewareInterface";
+import MiddlewareInterface from "../Middleware/MiddlewareInterface";
 
 export interface jsonResponse {
     status?: number;
@@ -27,7 +27,7 @@ export default class Response implements MiddlewareInterface
     {
         return res.responseJson = (response: jsonResponse) => {
             return res.json({
-                status: response.status ? true : false,
+                status: response.status && response.status == ( 200 | 201 ) ? true : false,
                 status_code: response.status ?? 400,
                 message: response.message ?? null,
                 data: response.data ?? null
