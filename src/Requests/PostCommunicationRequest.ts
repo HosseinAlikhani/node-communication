@@ -113,4 +113,26 @@ export default class PostCommunicationRequest
             throw new Error(error.message);
         }
     }
+
+    /**
+     * to array request instance
+     * @return object
+     */
+    public toObject(): object
+    {
+        return {
+            service: this.service,
+            port: this.port,
+            model_type: this.modelType,
+            model_id: this.modelId,
+            template: this.template,
+            template_id: this.templateId,
+            template_data: this.templateData,
+            receiver_data: this.receiverData,
+            send_at: this.sendAt,
+            thread: this.thread,
+            callback: this.callback,
+            callback_data: this.callbackData
+        };
+    }
 }
