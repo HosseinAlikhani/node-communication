@@ -21,7 +21,7 @@ export default class CommunicationRepository extends Repository
     /**
      * connect to communication collection
      */
-    private async tableConnection()
+    protected async tableConnection()
     {
         let dbConnection = await this.connect();
         return dbConnection.collection(this.collection);
