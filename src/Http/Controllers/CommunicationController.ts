@@ -1,7 +1,7 @@
-import Request from "../../Infrastructure/Request/Request";
-import RequestInterface from "../../Infrastructure/Request/RequestInterface";
-import ResponseInterface from "../../Infrastructure/Response/ResponseInterface";
-import PostCommunicationRequest from "../Requests/PostCommunicationRequest";
+import Request from "../../../Infrastructure/Request/Request";
+import RequestInterface from "../../../Infrastructure/Request/RequestInterface";
+import ResponseInterface from "../../../Infrastructure/Response/ResponseInterface";
+import PostCommunicationRequest from "../../Requests/PostCommunicationRequest";
 
 export default class CommunicationController
 {
