@@ -1,5 +1,7 @@
+import Request from "../../Infrastructure/Request/Request";
 import RequestInterface from "../../Infrastructure/Request/RequestInterface";
 import ResponseInterface from "../../Infrastructure/Response/ResponseInterface";
+import PostCommunicationRequest from "../Requests/PostCommunicationRequest";
 
 export default class CommunicationController
 {
@@ -13,8 +15,15 @@ export default class CommunicationController
      */
     public static async postCommunication(req: RequestInterface, res: ResponseInterface)
     {
-        return res.responseJson({
-            message: "ok"
-        });
+        try{
+            let validate = await PostCommunicationRequest.validate(req.getContent());
+
+
+        }catch(error: any){
+            return res.responseJson({
+                message: error.message,
+                status: Request.HTTP_UNPROCESSABLE_ENTITY
+            });
+        }
     }
 }
