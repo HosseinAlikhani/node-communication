@@ -1,5 +1,5 @@
-import AuthController from "../Controllers/AuthController";
-import CommunicationController from "../Controllers/CommunicationController";
+import AuthController from "../Http/Controllers/AuthController";
+import CommunicationController from "../Http/Controllers/CommunicationController";
 import AuthenticateMiddleware from "../Middlewares/AuthenticateMiddleware";
 import Routes from "./Routes";
 
