@@ -1,3 +1,4 @@
+import CommunicationRepository from "../../Repositories/CommunicationRepository";
 import PostCommunicationRequest from "../../Requests/PostCommunicationRequest";
 
 export default class CommunicationService
@@ -15,5 +16,14 @@ export default class CommunicationService
         }
 
         return this.instance;
+    }
+
+    /**
+     * create communication record
+     * @param communicationData
+     */
+    public async createCommunication(communicationData: PostCommunicationRequest)
+    {
+        await CommunicationRepository.initialize().create(communicationData.toObject());
     }
 }
