@@ -52,4 +52,13 @@ export default class Repository
     {
         return await this.connection.close();
     }
+
+    /**
+    * insert to database
+    * @param data
+    */
+    public async create(data)
+    {
+        return await (await this.tableConnection()).insertOne(data);
+    }
 }
