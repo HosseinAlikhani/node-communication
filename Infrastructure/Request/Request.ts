@@ -89,7 +89,7 @@ export default class Request implements MiddlewareInterface
     {
         return req.getContent = (key?: string) => {
             if(key){
-                return req.body[key] ?? null;
+                return req.body[key] ?? {};
             }
             return req.body;
         };
