@@ -7,7 +7,6 @@ export default class ApiRoutes extends Routes
 {
     public register()
     {
-        this.auth();
         this.communication();
     }
 
