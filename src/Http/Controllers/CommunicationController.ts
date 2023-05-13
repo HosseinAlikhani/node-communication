@@ -2,6 +2,7 @@ import Request from "../../../Infrastructure/Request/Request";
 import RequestInterface from "../../../Infrastructure/Request/RequestInterface";
 import ResponseInterface from "../../../Infrastructure/Response/ResponseInterface";
 import PostCommunicationRequest from "../../Requests/PostCommunicationRequest";
+import CommunicationService from "../Services/CommunicationService";
 
 export default class CommunicationController
 {
@@ -18,7 +19,12 @@ export default class CommunicationController
         try{
             let validate = await PostCommunicationRequest.validate(req.getContent());
 
+            await CommunicationService.initialize().createCommunication(validate);
 
+            return res.responseJson({
+                message: global.trans('CreateSuccessfuly'),
+                status: Request.HTTP_CREATED
+            });
         }catch(error: any){
             return res.responseJson({
                 message: error.message,
