@@ -3,9 +3,9 @@ export default interface RequestInterface
     /**
      * get request object
      * @param ?string key
-     * @return object|null
+     * @return object
      */
-    getContent(key?: string): object|null;
+    getContent(key?: string): object;
 
     /**
      * get headers
