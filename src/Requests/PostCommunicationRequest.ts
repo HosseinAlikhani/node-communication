@@ -1,10 +1,12 @@
+const Joi = require('joi');
+
 export default class PostCommunicationRequest
 {
     /**
      * send via which service
      * @var number
      */
-    public service: number;
+    public service: string;
 
     /**
      * send via which port of service
@@ -52,12 +54,12 @@ export default class PostCommunicationRequest
      * when send request
      * @var string
      */
-    public sendAt: string;
+    public sendAt: string|null;
 
     /**
      * sync or async
      */
-    public thread: number;
+    public thread: number|null;
 
     /**
      * callback when sent
@@ -70,4 +72,45 @@ export default class PostCommunicationRequest
      * @var object|null
      */
     public callbackData: object|null;
+
+    private constructor(data)
+    {
+        this.service = data.service;
+        this.port = data.port;
+        this.modelType = data.model_type;
+        this.modelId = data.model_id;
+        this.template = data.template;
+        this.templateId = data.template_id;
+        this.templateData = data.template_data;
+        this.receiverData = data.receiver_data;
+        this.sendAt = data.send_at;
+        this.thread = data.thread;
+        this.callback = data.callback;
+        this.callbackData = data.callbackData;
+    }
+
+    /**
+     * validate request data
+     * @param data
+     */
+    public static async validate(data)
+    {
+        const validation = Joi.object({
+            service: Joi.required(),
+            port: Joi.required(),
+            model_type: Joi.required(),
+            model_id: Joi.required(),
+            template: Joi.string(),
+            template_id: Joi.any().when('template', { is: Joi.any().valid(null,''), then: Joi.required(), otherwise: Joi.any() }),
+            template_data: Joi.object().required(),
+            receiver_data: Joi.object().required(),
+        });
+
+        try{
+            const value = await validation.validateAsync(data);
+            return new this(data);
+        }catch(error: any){
+            throw new Error(error.message);
+        }
+    }
 }
