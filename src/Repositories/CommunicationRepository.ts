@@ -37,6 +37,17 @@ export default class CommunicationRepository extends Repository
     }
 
     /**
+     * find communication by id
+     * @param _id
+     */
+    public async findCommunicationById(_id)
+    {
+        return await (await this.communication()).find({
+            _id: _id
+        }).toArray();
+    }
+
+    /**
      * insert communications to database
      */
     public async create(data)
