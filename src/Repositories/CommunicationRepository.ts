@@ -21,7 +21,7 @@ export default class CommunicationRepository extends Repository
     /**
      * connect to communication collection
      */
-    private async communication()
+    private async tableConnection()
     {
         let dbConnection = await this.connect();
         return dbConnection.collection(this.collection);
@@ -32,7 +32,7 @@ export default class CommunicationRepository extends Repository
      */
     public async find()
     {
-        let result = await (await this.communication()).find().toArray();
+        let result = await (await this.tableConnection()).find().toArray();
         return result;
     }
 
@@ -42,7 +42,7 @@ export default class CommunicationRepository extends Repository
      */
     public async findCommunicationById(_id)
     {
-        return await (await this.communication()).find({
+        return await (await this.tableConnection()).find({
             _id: _id
         }).toArray();
     }
@@ -54,7 +54,7 @@ export default class CommunicationRepository extends Repository
     {
         data.created_at = moment().unix();
         data.updated_at = moment().unix();
-        let createResult = await (await this.communication()).insertOne(data);
+        let createResult = await (await this.tableConnection()).insertOne(data);
         return await this.findCommunicationById(createResult.insertedId);
     }
 }
