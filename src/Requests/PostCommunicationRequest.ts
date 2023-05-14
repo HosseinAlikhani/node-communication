@@ -78,7 +78,7 @@ export default class PostCommunicationRequest
     private constructor(data)
     {
         this.service = this.setService(data.service);
-        this.port = data.port;
+        this.port = this.setPort(data.service, data.port);
         this.modelType = data.model_type;
         this.modelId = data.model_id;
         this.template = data.template;
@@ -99,6 +99,18 @@ export default class PostCommunicationRequest
     {
         if(AbstractService.isServiceValid(_service) ){
             return _service;
+        }
+    }
+
+    /**
+     * set port & validate port
+     * @param _service 
+     * @param _port 
+     */
+    private setPort(_service, _port)
+    {
+        if(AbstractService.isPortValid(_service, _port) ){
+            return _port;
         }
     }
 
