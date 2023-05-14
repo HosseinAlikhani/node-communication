@@ -24,6 +24,9 @@ export default class CommunicationService
      */
     public async createCommunication(communicationData: PostCommunicationRequest)
     {
-        await CommunicationRepository.initialize().create(communicationData.toObject());
+        let repository = CommunicationRepository.initialize();
+        let communication = await repository.createCommunication(communicationData.toObject());
+        repository.close();
+        return communication;
     }
 }
