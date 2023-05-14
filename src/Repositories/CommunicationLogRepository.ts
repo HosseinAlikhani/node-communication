@@ -18,11 +18,14 @@ export default class CommunicationLogRepository extends Repository
     }
 
     /**
-     * connect to communication callback collection
+     * create communication log
+     * @param _communicationId 
+     * @param _logData 
      */
-    private async tableConnection()
+    public async createCommunicationLog(_communicationId, _logData)
     {
-        let dbConnection = await this.connect();
-        return dbConnection.collection(this.collection);
+        _logData.created_at = this.nowDateTime();
+        _logData.communication_id = _communicationId;
+        return await this.create(_logData);
     }
 }
