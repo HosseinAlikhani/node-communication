@@ -1,3 +1,5 @@
+import AbstractService from "../Services/AbstractService";
+
 const Joi = require('joi');
 
 export default class PostCommunicationRequest
@@ -75,7 +77,7 @@ export default class PostCommunicationRequest
 
     private constructor(data)
     {
-        this.service = data.service;
+        this.service = this.setService(data.service);
         this.port = data.port;
         this.modelType = data.model_type;
         this.modelId = data.model_id;
@@ -87,6 +89,17 @@ export default class PostCommunicationRequest
         this.thread = data.thread;
         this.callback = data.callback;
         this.callbackData = data.callback_data;
+    }
+
+    /**
+     * set service & validate service
+     * @param _service
+     */
+    private setService(_service)
+    {
+        if(AbstractService.isServiceValid(_service) ){
+            return _service;
+        }
     }
 
     /**
