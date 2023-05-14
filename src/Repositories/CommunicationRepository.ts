@@ -1,5 +1,4 @@
 import Repository from "./Repository";
-const moment = require('moment');
 
 export default class CommunicationRepository extends Repository
 {
@@ -43,8 +42,8 @@ export default class CommunicationRepository extends Repository
      */
     public async createCommunication(data)
     {
-        data.created_at = moment().unix();
-        data.updated_at = moment().unix();
+        data.created_at = this.nowDateTime();
+        data.updated_at = this.nowDateTime();
         let createResult = await this.create(data);
         return await this.findCommunicationById(createResult.insertedId);
     }
