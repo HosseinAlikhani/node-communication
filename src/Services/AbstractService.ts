@@ -1,4 +1,5 @@
 const fs = require('fs');
+import SlackService from "./SlackService";
 
 export default class AbstractService
 {
@@ -11,7 +12,7 @@ export default class AbstractService
     public static isServiceValid(_service)
     {
         let service = this.getService(_service);
-        
+
         try{
             // check service is exists or not
             if(fs.existsSync(`${process.env.PWD}/src/Services/${service}.ts`)){
@@ -42,5 +43,17 @@ export default class AbstractService
             }));
         }
         return service;
+    }
+
+    /**
+     * check service port's is valid or not
+     * @param _service
+     * @param _port 
+     */
+    public static isPortValid(_service, _port)
+    {
+        let serviceName = this.getService(_service);
+        const service = require(`./${serviceName}`);
+        return true;
     }
 }
