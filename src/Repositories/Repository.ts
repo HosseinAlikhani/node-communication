@@ -19,6 +19,11 @@ export default class Repository
     private connection;
 
     /**
+     * store collection name
+     */
+    protected collection: string;
+
+    /**
      * repository constructor
      */
     public constructor()
@@ -51,6 +56,15 @@ export default class Repository
     protected async close()
     {
         return await this.connection.close();
+    }
+
+    /**
+     * table connection
+     */
+    protected async tableConnection()
+    {
+        let dbConnection = await this.connect();
+        return dbConnection.collection(this.collection);
     }
 
     /**
