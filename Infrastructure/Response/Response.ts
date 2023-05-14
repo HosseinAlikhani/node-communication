@@ -26,12 +26,13 @@ export default class Response implements MiddlewareInterface
     private setJsonResponse(res)
     {
         return res.responseJson = (response: jsonResponse) => {
-            return res.json({
+            let StatusCode = response.status ?? 400;
+            return res.status(StatusCode).json({
                 status: response.status && response.status == ( 200 | 201 ) ? true : false,
-                status_code: response.status ?? 400,
+                status_code: StatusCode,
                 message: response.message ?? null,
                 data: response.data ?? null
-            });
+            }).status(StatusCode);
         }
     }
 }
