@@ -1,4 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
+const moment = require('moment');
+
 export default class Repository
 {
     /**
@@ -30,6 +32,15 @@ export default class Repository
     {
         this.db = process.env.MONGODB_DB_NAME;
         this.url = process.env.MONGODB_URL;
+    }
+
+    /**
+     * return now date time with unix timestamp
+     * @return number
+     */
+    protected nowDateTime(): number
+    {
+        return moment().unix()
     }
 
     /**
