@@ -86,7 +86,7 @@ export default class PostCommunicationRequest
         this.sendAt = data.send_at;
         this.thread = data.thread;
         this.callback = data.callback;
-        this.callbackData = data.callbackData;
+        this.callbackData = data.callback_data;
     }
 
     /**
@@ -104,6 +104,8 @@ export default class PostCommunicationRequest
             template_id: Joi.any().when('template', { is: Joi.any().valid(null,''), then: Joi.required(), otherwise: Joi.any() }),
             template_data: Joi.object().required(),
             receiver_data: Joi.object().required(),
+            callback: Joi.string(),
+            callback_data: Joi.object()
         });
 
         try{
