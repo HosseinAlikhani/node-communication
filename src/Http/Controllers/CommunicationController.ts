@@ -19,11 +19,12 @@ export default class CommunicationController
         try{
             let validate = await PostCommunicationRequest.validate(req.getContent());
 
-            await CommunicationService.initialize().createCommunication(validate);
+            let controllerResult = await CommunicationService.initialize().createCommunication(validate);
 
             return res.responseJson({
                 message: global.trans('CreateSuccessfuly'),
-                status: Request.HTTP_CREATED
+                status: Request.HTTP_CREATED,
+                data: controllerResult
             });
         }catch(error: any){
             return res.responseJson({
