@@ -1,9 +1,8 @@
 import Repository from "./Repository";
-const moment = require('moment');
 
-export default class CommunicationCallbackRepository extends Repository
+export default class CommunicationLogRepository extends Repository
 {
-    protected collection = 'communication_callbacks';
+    protected collection = 'communication_logs';
 
     private static instance;
 
