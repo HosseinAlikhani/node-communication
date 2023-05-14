@@ -10,14 +10,8 @@ export default class AbstractService
 
     public static isServiceValid(_service)
     {
-        // check if exists in serviceIDs property
-        let service = this.serviceIDs[_service];
-        if(! service){
-            throw new Error(global.trans("ServiceNotValid", {
-                service: _service
-            }));
-        }
-
+        let service = this.getService(_service);
+        
         try{
             // check service is exists or not
             if(fs.existsSync(`${process.env.PWD}/src/Services/${service}.ts`)){
@@ -31,5 +25,22 @@ export default class AbstractService
                 service: service
             }));
         }
+    }
+    
+    /**
+     * get service name from service unique id
+     * @param _service
+     * @returns 
+     */
+    public static getService(_service: string)
+    {
+        // check if exists in serviceIDs property
+        let service = this.serviceIDs[_service];
+        if(! service){
+            throw new Error(global.trans("ServiceNotValid", {
+                service: _service
+            }));
+        }
+        return service;
     }
 }
