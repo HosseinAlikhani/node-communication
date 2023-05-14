@@ -9,7 +9,12 @@ export default class Http
      */
     public constructor()
     {
-        this.axios = require('axios');
+        const axios = require('axios');
+        this.axios = axios.create({
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        });
     }
 
     /**
