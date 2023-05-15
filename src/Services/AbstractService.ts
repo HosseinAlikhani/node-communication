@@ -46,14 +46,23 @@ export default class AbstractService
     }
 
     /**
+     * TODO must change async with out import service class for check port
      * check service port's is valid or not
      * @param _service
      * @param _port 
      */
-    public static isPortValid(_service, _port)
+    public static async isPortValid(_service, _port)
     {
-        let serviceName = this.getService(_service);
-        const service = require(`./${serviceName}`);
-        return true;
+        try{
+            const service = await import(`./${this.getService(_service)}`);
+            if( service.default.portIDs[_port] ){
+                return true;
+            }else{
+                throw new Error(`Port '${_port}' not found ..!`);
+            }
+
+        }catch(e: any){
+            throw new Error(`Port '${_port}' not found ..!`);
+        }
     }
 }
