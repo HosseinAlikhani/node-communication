@@ -99,6 +99,7 @@ export default class PostCommunicationRequest
         this.thread = data.thread;
         this.callback = data.callback;
         this.callbackData = data.callback_data;
+        return this;
     }
 
     /**
