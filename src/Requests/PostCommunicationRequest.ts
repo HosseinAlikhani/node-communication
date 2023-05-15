@@ -75,10 +75,20 @@ export default class PostCommunicationRequest
      */
     public callbackData: object|null;
 
-    private constructor(data)
+    private constructor()
+    {
+        //
+    }
+
+    /**
+     * initialize post communication request
+     * @param data 
+     * @returns 
+     */
+    private async initialize(data)
     {
         this.service = this.setService(data.service);
-        this.port = this.setPort(data.service, data.port);
+        this.port = await this.setPort(data.service, data.port);
         this.modelType = data.model_type;
         this.modelId = data.model_id;
         this.template = data.template;
@@ -107,11 +117,10 @@ export default class PostCommunicationRequest
      * @param _service 
      * @param _port 
      */
-    private setPort(_service, _port)
+    private async setPort(_service, _port)
     {
-        if(AbstractService.isPortValid(_service, _port) ){
-            return _port;
-        }
+        await AbstractService.isPortValid(_service, _port)
+        return _port;
     }
 
     /**
@@ -135,7 +144,7 @@ export default class PostCommunicationRequest
 
         try{
             const value = await validation.validateAsync(data);
-            return new this(data);
+            return await (new this).initialize(data);
         }catch(error: any){
             throw new Error(error.message);
         }
