@@ -54,12 +54,17 @@ export default class AbstractService
     public static async isPortValid(_service, _port)
     {
         try{
-            const service = await import(`./${this.getService(_service)}`);
-            if( service.default.portIDs[_port] ){
-                return true;
-            }else{
-                throw new Error(`Port '${_port}' not found ..!`);
+            let service = ( await import(`./${this.getService(_service)}`) ).default;
+
+            // check service's port
+            if( service.portIDs[_port] ){
+                // check port method is exists or not
+                if( service.prototype[ service.portIDs[_port] ] ){
+                    return true;
+                }
             }
+            
+            throw 'ERROR';
 
         }catch(e: any){
             throw new Error(`Port '${_port}' not found ..!`);
