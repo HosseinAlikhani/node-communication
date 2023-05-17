@@ -79,6 +79,16 @@ export default class Repository
     }
 
     /**
+     * find one 
+     * @param query 
+     * @returns 
+     */
+    protected async findOne(query)
+    {
+        return await (await this.tableConnection()).findOne(query);
+    }
+
+    /**
     * insert to database
     * @param data
     */
