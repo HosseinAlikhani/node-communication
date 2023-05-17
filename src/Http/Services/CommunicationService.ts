@@ -1,5 +1,6 @@
 import CommunicationRepository from "../../Repositories/CommunicationRepository";
 import PostCommunicationRequest from "../../Requests/PostCommunicationRequest";
+import AbstractService from "../../Services/AbstractService";
 
 export default class CommunicationService
 {
@@ -24,9 +25,12 @@ export default class CommunicationService
      */
     public async createCommunication(communicationData: PostCommunicationRequest)
     {
-        let repository = CommunicationRepository.initialize();
-        let communication = await repository.createCommunication(communicationData.toObject());
+        // insert communication data to database
+        let repository = CommunicationRepository.initialize(),
+            communication = await repository.createCommunication(communicationData.toObject());
         repository.close();
+
+        await AbstractService.execute(communication);
         return communication;
     }
 }
