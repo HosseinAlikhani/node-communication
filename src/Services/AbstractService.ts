@@ -7,7 +7,32 @@ export default class AbstractService
         "11001": "SlackService"
     };
 
-    protected static instnace;
+    /**
+     * store communication instance
+     */
+    protected communication;
+
+    /**
+     * initialize service
+     * @param communication 
+     */
+    public static async execute(communication)
+    {
+        let instance = new this();
+        instance.communication = communication;
+        await instance.makeServicePort(communication.service, communication.port);
+    }
+
+    /**
+     * execute service port 
+     * @param _service 
+     * @param _port 
+     */
+    private async makeServicePort(_service, _port)
+    {
+        let service = ( await import(`./${AbstractService.getService(_service)}`) ).default;
+        service.prototype[ service.portIDs[_port] ]();
+    }
 
     public static isServiceValid(_service)
     {
