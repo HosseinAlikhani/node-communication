@@ -20,10 +20,9 @@ export default class CommunicationRepository extends Repository
     /**
      * find all communications
      */
-    public async find()
+    public async findCommunications()
     {
-        let result = await (await this.tableConnection()).find().toArray();
-        return result;
+        return this.find();
     }
 
     /**
