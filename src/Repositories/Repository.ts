@@ -79,6 +79,16 @@ export default class Repository
     }
 
     /**
+     * find
+     * @param query 
+     * @returns 
+     */
+    protected async find(query: object = {})
+    {
+        return await (await this.tableConnection()).find().toArray();
+    }
+
+    /**
      * find one 
      * @param query 
      * @returns 
