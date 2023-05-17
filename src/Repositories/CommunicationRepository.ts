@@ -32,9 +32,9 @@ export default class CommunicationRepository extends Repository
      */
     public async findCommunicationById(_id)
     {
-        return await (await this.tableConnection()).find({
+        return await (await this.tableConnection()).findOne({
             _id: _id
-        }).toArray();
+        });
     }
 
     /**
