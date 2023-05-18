@@ -17,22 +17,22 @@ export default class AbstractService
      * initialize service
      * @param communication 
      */
-    public static async execute(communication)
+    public static execute(communication)
     {
         let instance = new this();
         instance.communication = communication;
-        await instance.makeServicePort(communication.service, communication.port);
+        return instance;
     }
 
     /**
-     * execute service port 
-     * @param _service 
-     * @param _port 
+     * make service port 
+     * @param _communication 
      */
-    private async makeServicePort(_service, _port)
+    public static async makeServicePort(_communication)
     {
-        let service = ( await import(`./${AbstractService.getService(_service)}`) ).default;
-        service.prototype[ service.portIDs[_port] ]();
+        let service = ( await import(`./${AbstractService.getService(_communication.service)}`) ).default; // import service
+        let instance = service.execute(_communication); //execute target service
+        instance[service.portIDs[_communication.port]]() // fire service port method
     }
 
     public static isServiceValid(_service)
@@ -103,10 +103,10 @@ export default class AbstractService
      * @param number data[status]
      * @param string data[message]
      */
-    protected log(data)
+    protected async log(data)
     {
         let communicationLogRepo = CommunicationLogRepository.initialize();
-        communicationLogRepo.createCommunicationLog(data);
+        await communicationLogRepo.createCommunicationLog(this.communication._id, data);
         communicationLogRepo.close();
     }
 }
