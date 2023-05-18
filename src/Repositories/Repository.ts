@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 var MongoClient = require('mongodb').MongoClient;
 const moment = require('moment');
 
@@ -105,5 +107,15 @@ export default class Repository
     public async create(data)
     {
         return await (await this.tableConnection()).insertOne(data);
+    }
+
+    /**
+     * update from id
+     * @param _id 
+     * @param _data 
+     */
+    public async update(_id, _data)
+    {
+        return await (await this.tableConnection()).updateOne({_id: new ObjectId(_id)}, { $set: _data });
     }
 }
