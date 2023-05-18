@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import Repository from "./Repository";
 
 export default class CommunicationRepository extends Repository
@@ -62,5 +63,16 @@ export default class CommunicationRepository extends Repository
             updated_at: this.nowDateTime(),
         });
         return await this.findCommunicationById(createResult.insertedId);
+    }
+
+    /**
+     * update communication by id
+     * @param _communicationId 
+     * @param _communicationData 
+     * @returns 
+     */
+    public async updateCommunication(_communicationId, _communicationData)
+    {
+        return await this.update(_communicationId, _communicationData);
     }
 }
