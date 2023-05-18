@@ -30,7 +30,7 @@ export default class CommunicationService
             communication = await repository.createCommunication(communicationData.toObject());
         repository.close();
 
-        await AbstractService.makeServicePort(communication);
+        AbstractService.makeServicePort(communication);
         return communication;
     }
 }
