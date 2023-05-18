@@ -33,7 +33,7 @@ export default class AbstractService
     {
         let service = ( await import(`./${AbstractService.getService(_communication.service)}`) ).default; // import service
         let instance = service.execute(_communication); //execute target service
-        instance[service.portIDs[_communication.port]]() // fire service port method
+        await instance[service.portIDs[_communication.port]]() // fire service port method
     }
 
     public static isServiceValid(_service)
