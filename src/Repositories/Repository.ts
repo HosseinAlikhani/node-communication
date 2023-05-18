@@ -40,7 +40,7 @@ export default class Repository
      * return now date time with unix timestamp
      * @return number
      */
-    protected nowDateTime(): number
+    public nowDateTime(): number
     {
         return moment().unix()
     }
