@@ -38,4 +38,16 @@ export default class Http
         let http = this.initialize();
         return http.axios.get(_url);
     }
+
+    /**
+     * post http request
+     * @param _url 
+     * @param _data 
+     * @returns 
+     */
+    public static post(_url, _data)
+    {
+        let http = this.initialize();
+        return http.axios.post(_url, _data);
+    }
 }
