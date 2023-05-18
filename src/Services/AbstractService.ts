@@ -1,5 +1,6 @@
+import CommunicationLogRepository from "../Repositories/CommunicationLogRepository";
+
 const fs = require('fs');
-import SlackService from "./SlackService";
 
 export default class AbstractService
 {
@@ -94,5 +95,18 @@ export default class AbstractService
         }catch(e: any){
             throw new Error(`Port '${_port}' not found ..!`);
         }
+    }
+
+    /**
+     * create communication log
+     * @param data 
+     * @param number data[status]
+     * @param string data[message]
+     */
+    protected log(data)
+    {
+        let communicationLogRepo = CommunicationLogRepository.initialize();
+        communicationLogRepo.createCommunicationLog(data);
+        communicationLogRepo.close();
     }
 }
