@@ -24,8 +24,11 @@ export default class CommunicationLogRepository extends Repository
      */
     public async createCommunicationLog(_communicationId, _logData)
     {
-        _logData.created_at = this.nowDateTime();
-        _logData.communication_id = _communicationId;
-        return await this.create(_logData);
+        return await this.create({
+            communication_id: _communicationId,
+            status: _logData.status,
+            message: _logData.message,
+            created_at: this.nowDateTime()
+        });
     }
 }
