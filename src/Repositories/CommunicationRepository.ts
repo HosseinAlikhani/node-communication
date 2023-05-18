@@ -43,7 +43,24 @@ export default class CommunicationRepository extends Repository
     {
         data.created_at = this.nowDateTime();
         data.updated_at = this.nowDateTime();
-        let createResult = await this.create(data);
+        let createResult = await this.create({
+            service: data.service,
+            port: data.port,
+            model_type: data.model_type,
+            model_id: data.model_id,
+            template: data.template,
+            template_id: data.template_id,
+            template_data: data.template_data,
+            receiver_data: data.receiver_data,
+            send_at: data.send_at,
+            thread: data.thread,
+            callback: data.callback,
+            callback_data: data.callback_data,
+            try_count: 0,
+            delivery_at: null,
+            created_at: this.nowDateTime(),
+            updated_at: this.nowDateTime(),
+        });
         return await this.findCommunicationById(createResult.insertedId);
     }
 }
