@@ -1,4 +1,5 @@
 import CommunicationLogRepository from "../Repositories/CommunicationLogRepository";
+import CommunicationRepository from "../Repositories/CommunicationRepository";
 
 const fs = require('fs');
 
@@ -108,5 +109,17 @@ export default class AbstractService
         let communicationLogRepo = CommunicationLogRepository.initialize();
         await communicationLogRepo.createCommunicationLog(this.communication._id, data);
         communicationLogRepo.close();
+    }
+
+    /**
+     * communication delivered
+     */
+    protected async delivered()
+    {
+        let communicationRepo = CommunicationRepository.initialize();
+        await communicationRepo.updateCommunication(this.communication._id, {
+            delivery_at: communicationRepo.nowDateTime()
+        });
+        communicationRepo.close();
     }
 }
