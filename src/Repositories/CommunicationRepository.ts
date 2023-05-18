@@ -33,7 +33,7 @@ export default class CommunicationRepository extends Repository
     public async findCommunicationById(_id)
     {
         return await this.findOne({
-            _id: _id
+            _id: new ObjectId(_id)
         });
     }
 
